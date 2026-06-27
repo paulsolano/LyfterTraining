@@ -1,0 +1,85 @@
+[
+   {
+      "name": "Pikachu",
+      "type": "Electric",
+      "level": 54,
+      "weight_kg": 6.0,
+      "is_shiny": false,
+      "held_item": null,
+      "skills": [
+         "Thunder Shock",
+         "Quick Attack",
+         "Thunderbolt",
+         "Volt Tackle"
+      ],
+      "stats": {
+         "hp": 35,
+         "attack": 55,
+         "defense": 40,
+         "sp_attack": 50,
+         "sp_defense": 50,
+         "speed": 90
+      }
+   },
+   {
+      "name": "Charmander",
+      "type": "Fire",
+      "level": 8,
+      "weight_kg": 8.5,
+      "is_shiny": true,
+      "held_item": "Charcoal",
+      "skills": [
+         "Ember",
+         "Scratch",
+         "Tackle",
+         "Smokescreen"
+      ],
+      "stats": {
+         "hp": 39,
+         "attack": 52,
+         "defense": 43,
+         "sp_attack": 60,
+         "sp_defense": 50,
+         "speed": 65
+      }
+   },
+   {
+      "name": "Gengar",
+      "type": "Fantasma",
+      "level": 9,
+      "weight_kg": 40.5,
+      "is_shiny": false,
+      "held_item": null,
+      "skills": [
+         "cuerpo maldito"
+      ],
+      "stats": {
+         "hp": 110,
+         "attack": 4,
+         "defense": 4,
+         "sp_attack": 8,
+         "sp_defense": 5,
+         "speed": 7
+      }
+   },
+   {
+      "name": "Beedrill",
+      "type": "Bicho",
+      "level": 7,
+      "weight_kg": 29.5,
+      "is_shiny": true,
+      "held_item": "Aguijones",
+      "skills": [
+         "Puya nociva",
+         "Aguja Fugaz"
+      ],
+      "stats": {
+         "hp": 120,
+         "attack": 6,
+         "defense": 3,
+         "sp_attack": 3,
+         "sp_defense": 5,
+         "speed": 5
+      }
+   }
+]
