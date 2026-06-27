@@ -1,5 +1,6 @@
 print()
 print("Ejercicio 1 - Diccionarios\n")
+print("Hola nuevos cambios!!!")
 
 hotel_data = {
     "name": "Hotel Solana",
