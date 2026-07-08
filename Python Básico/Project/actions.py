@@ -1,5 +1,5 @@
 import menu
-from data import students
+
 
 def get_valid_grade(subject):
     while True:
@@ -14,7 +14,7 @@ def get_valid_grade(subject):
             continue
         return grade
 
-def valid_name(name):
+def valid_name(name, students):
     if not name.strip() or any(char.isdigit() for char in name):
         print("Invalid name. Please enter a non-empty name without numbers.")
         return False
@@ -29,10 +29,10 @@ def valid_section(section):
         return False
     return True
 
-def add_student():
+def add_student(students):
     while True:
         name = input("Enter the student's complete name: ")
-        if valid_name(name):
+        if valid_name(name, students):
             break
 
     while True:
@@ -49,7 +49,7 @@ def add_student():
     print(f"Student {name} from {section} added successfully.")
 
 
-def show_students():
+def show_students(students):
     if not students:
         print("No students found.")
         return
@@ -59,7 +59,7 @@ def show_students():
         print("--------------------------------------------------")
     print("Students listed successfully.")
 
-def top_three_students():
+def top_three_students(students):
     if not students:
         print("No students found.")
         return
@@ -72,7 +72,7 @@ def top_three_students():
         average_grade = (student['spanish_grade'] + student['english_grade'] + student['social_studies_grade'] + student['science_grade']) / 4
         print(f"Name: {student['name']}, Section: {student['section']}, Average Grade: {average_grade:.2f}")
 
-def average_grade_per_student():
+def average_grade_per_student(students):
     if not students:
         print("No students found.")
         return
@@ -86,7 +86,7 @@ def average_grade_per_student():
     
     print(f"Average Grade of All Students: {average:.2f}")
 
-def underage_grade_per_student():
+def underage_grade_per_student(students):
     if not students:
         print("No students found.")
         return
@@ -96,7 +96,7 @@ def underage_grade_per_student():
         if average_grade < 60:
             print(f"Name: {student['name']}, Section: {student['section']}, Average Grade: {average_grade:.2f} - Below Passing Grade")
 
-def delete_student():
+def delete_student(students):
     name = input("Enter the complete name of the student AND the section to delete: ")
     section = input("Enter the section of the student to delete: ")
     for student in students:

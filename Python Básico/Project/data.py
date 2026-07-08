@@ -1,9 +1,8 @@
 import os
 
-students = []
 CSV_FILE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "students.csv")
 
-def save_students_to_csv(file_path):
+def save_students_to_csv(file_path, students):
     import csv
     try:
         with open(file_path, 'w', encoding='utf-8', newline='') as csvfile:
@@ -15,7 +14,7 @@ def save_students_to_csv(file_path):
     except Exception as e:
         print(f"An error occurred while saving the data to the CSV file: {e}")
 
-def load_students_from_csv(file_path):
+def load_students_from_csv(file_path, students):
     import csv
     try:
         with open(file_path, 'r', encoding='utf-8') as csvfile:
