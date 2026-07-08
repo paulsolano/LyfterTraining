@@ -1,3 +1,5 @@
+import re
+
 import menu
 
 
@@ -24,8 +26,9 @@ def valid_name(name, students):
     return True
 
 def valid_section(section):
-    if section not in ["10A", "10B", "10C"]:
-        print("Invalid section. Please enter 10A, 10B, or 10C.")
+    section_pattern = re.compile(r"^\d{1,2}[A-Z]$")
+    if not section_pattern.match(section):
+        print("Invalid section. Please enter a grade number followed by a section letter, e.g. 10A.")
         return False
     return True
 
