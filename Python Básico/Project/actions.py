@@ -28,7 +28,7 @@ def valid_name(name, students):
 def valid_section(section):
     section_pattern = re.compile(r"^\d{1,2}[A-Z]$")
     if not section_pattern.match(section):
-        print("Invalid section. Please enter a grade number followed by a section letter, e.g. 10A.")
+        print("Invalid section. Please enter a grade number followed by a section letter, e.g. 10A, 11B, 12C.")
         return False
     return True
 
