@@ -1,0 +1,78 @@
+# Documentación de Commits — Repositorio LyfterTraining
+
+---
+
+## 1. `e1b3101` — Initial commit
+**Branch:** base (previo a la creación de otros branches)
+**Fecha:** Sáb Jun 27, 2026 — 12:06:13
+
+**¿Qué cambió?**
+Se creó el repositorio en GitHub con el commit inicial, sin contenido adicional aún. Este commit marca el punto de partida del proyecto.
+
+**¿Por qué se hizo ese cambio?**
+Para inicializar el repositorio y dejar una base sobre la cual se pudieran empezar a agregar archivos y crear branches más adelante.
+
+---
+
+## 2. `ab1e286` — Uploading first exercises
+**Branch:** `main`
+**Fecha:** Sáb Jun 27, 2026 — 13:12:07
+
+**¿Qué cambió?**
+El branch `main` no tenía ningún archivo de ejercicios todavía, así que se agregaron y se subieron al remoto los primeros ejercicios realizados en el curso.
+
+**¿Por qué se hizo ese cambio?**
+Para que `main` tuviera contenido guardado y quedara un respaldo remoto de los primeros ejercicios completados.
+
+---
+
+## 3. `7e31378` — Applied feedback on dictionaries
+**Branch:** `done`
+**Fecha:** Sáb Jun 27, 2026 — 13:51:10
+
+**¿Qué cambió?**
+Se subieron al branch `done` los cambios correspondientes al ejercicio de diccionarios, ya con el feedback recibido aplicado.
+
+**¿Por qué se hizo ese cambio?**
+Para practicar el flujo de aplicar cambios en el código a partir de un feedback y luego dejarlos respaldados remotamente en su propio branch.
+
+---
+
+## 4. `f341a77` — Merge pull request #1 from paulsolano/done
+**Branch:** `main` (merge desde `done`)
+**Fecha:** Sáb Jun 27, 2026 — 13:52:13
+
+**¿Qué cambió?**
+Se integraron a `main` los cambios que ya estaban subidos en el branch `done`, mediante un pull request.
+
+**¿Por qué se hizo ese cambio?**
+Para mantener `main` actualizado con el trabajo ya finalizado y aprobado en `done`, y practicar el flujo de merge entre branches.
+
+---
+
+## 5. `b66565d` — Create IT Essentials
+**Branch:** `past-exercises`
+**Fecha:** Mié Jul 1, 2026 — 00:06:23
+
+**¿Qué cambió?**
+Se creó una carpeta llamada "IT Essentials" sin contenido, producto de un intento de subir los ejercicios archivo por archivo en lugar de subir la carpeta completa de una vez.
+
+**¿Por qué se hizo ese cambio?**
+La intención era subir todos los ejercicios pendientes, pero al notar que la carpeta había quedado vacía tras el intento, se dejó así momentáneamente y se corrigió en el siguiente commit.
+
+---
+
+## 6. `cf1447f` — Add first exercises from the first three modules I completed ✅ *(commit vigente)*
+**Branch:** `past-exercises` / `origin/past-exercises`
+**Fecha:** Mié Jul 1, 2026 — 00:17:10
+
+**¿Qué cambió?**
+Se agregaron correctamente los 3 archivos de ejercicios correspondientes a los primeros tres módulos completados, y se subieron (push) al branch remoto `origin/past-exercises`, que antes no los tenía.
+
+**¿Por qué se hizo ese cambio?**
+Para tener un respaldo remoto del progreso realizado y llevar un historial ordenado de los ejercicios completados por módulo.
+
+---
+
+### Nota
+Los commits `b66565d` y `cf1447f` pertenecen al mismo branch (`past-exercises`): el primero fue un intento incompleto y el segundo es el que finalmente dejó el contenido correcto y vigente tanto en local como en el remoto.
