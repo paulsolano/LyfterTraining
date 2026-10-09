@@ -1,6 +1,6 @@
 def bubble_sort_steps(list_to_sort):
-    global interchanges
-    global iterator
+    interchanges = 0
+    iterator = 0
     for outer_index in range(len(list_to_sort)):
         has_swapped = False
         for inner_index in range(0, len(list_to_sort) - outer_index - 1):
@@ -14,11 +14,9 @@ def bubble_sort_steps(list_to_sort):
                 has_swapped = True
                 interchanges += 1
         if not has_swapped:
-            return  # If no swaps were made, the list is sorted and we can exit
+            return interchanges, iterator # If no swaps were made, the list is sorted and we can exit
 my_test_list = [18, 23, 22, 67, 93, 49, 11,101, 0, 5, 42]
-interchanges = 0
-iterator = 0
-bubble_sort_steps(my_test_list)
+interchanges, iterator = bubble_sort_steps(my_test_list)
 print(my_test_list)
 print(f'Total iterations made: {iterator}')
 print(f'Total interchanges made: {interchanges}')
