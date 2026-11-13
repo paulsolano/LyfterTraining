@@ -34,7 +34,7 @@ class GestorFinanzas:
 
     def agregar_movimiento(self, monto, descripcion, categoria_nombre, tipo, fecha):
         if categoria_nombre not in self.categorias:
-            self.agregar_categoria(categoria_nombre)
+            raise ValueError(f"La categoría '{categoria_nombre}' no existe")
         movimiento = Movimiento(monto, descripcion, categoria_nombre, tipo, fecha)
         self.categorias[categoria_nombre].agregar_movimiento(movimiento)
 

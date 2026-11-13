@@ -24,7 +24,18 @@ def ejecutar():
     gestor = logica.GestorFinanzas()
     for nombre in archivos.cargar_categorias():
         gestor.agregar_categoria(nombre)
-    for fila in archivos.cargar_movimientos():
+
+    movimientos_guardados = archivos.cargar_movimientos()
+    categorias_faltantes = sorted({
+        fila[2] for fila in movimientos_guardados if fila[2] not in gestor.obtener_categorias()
+    })
+    if categorias_faltantes:
+        for nombre in categorias_faltantes:
+            gestor.agregar_categoria(nombre)
+        archivos.guardar_categorias(gestor.obtener_categorias())
+        sg.popup("Aviso", f"Se reconstruyeron estas categorías a partir de movimientos ya guardados: {', '.join(categorias_faltantes)}.")
+
+    for fila in movimientos_guardados:
         monto, titulo, categoria, tipo = fila[:4]
         fecha = fila[4] if len(fila) > 4 else datetime.now().strftime(_FORMATO_FECHA)
         gestor.agregar_movimiento(monto, titulo, categoria, tipo, fecha)
@@ -54,7 +65,7 @@ def ejecutar():
             break
 
         if event == "Agregar Categoría":
-            nueva_categoria = _ventana_agregar_categoria()
+            nueva_categoria = _ventana_agregar_categoria(gestor.obtener_categorias())
             if nueva_categoria:
                 gestor.agregar_categoria(nueva_categoria)
                 archivos.guardar_categorias(gestor.obtener_categorias())
@@ -68,10 +79,14 @@ def ejecutar():
                 datos = _ventana_agregar_movimiento(tipo, categorias)
                 if datos:
                     monto, titulo, categoria, fecha = datos
-                    gestor.agregar_movimiento(monto, titulo, categoria, tipo, fecha)
-                    archivos.guardar_movimientos([m.a_lista() for m in gestor.obtener_todos_los_movimientos()])
-                    movimientos_mostrados = gestor.obtener_todos_los_movimientos()
-                    window["-TABLA-"].update(values=_tabla(movimientos_mostrados))
+                    try:
+                        gestor.agregar_movimiento(monto, titulo, categoria, tipo, fecha)
+                    except ValueError as error:
+                        sg.popup_error("Error", str(error))
+                    else:
+                        archivos.guardar_movimientos([m.a_lista() for m in gestor.obtener_todos_los_movimientos()])
+                        movimientos_mostrados = gestor.obtener_todos_los_movimientos()
+                        window["-TABLA-"].update(values=_tabla(movimientos_mostrados))
 
         if event == "Filtrar":
             fecha_inicio = values["-FECHA_INICIO-"]
@@ -105,7 +120,7 @@ def _tabla(movimientos):
         filas.append([fecha, f"₡{monto}", titulo, categoria, tipo])
     return filas
 
-def _ventana_agregar_categoria():
+def _ventana_agregar_categoria(categorias_existentes):
     layout = [
         [sg.Text("Nombre de la categoría"), sg.Input(key="-NOMBRE-", enable_events=True)],
         [sg.pin(sg.Text(f"Máximo {_MAX_CATEGORIA} caracteres", text_color="red", key="-AVISO_NOMBRE-", visible=False))],
@@ -113,6 +128,7 @@ def _ventana_agregar_categoria():
     ]
     ventana = sg.Window("Agregar Categoría", layout, modal=True)
     categoria = None
+    nombres_existentes = {nombre.lower() for nombre in categorias_existentes}
 
     while True:
         event, values = ventana.read()
@@ -128,6 +144,8 @@ def _ventana_agregar_categoria():
             nombre = values["-NOMBRE-"].strip()
             if not nombre:
                 sg.popup_error("Error", "Debes escribir un nombre de categoría.")
+            elif nombre.lower() in nombres_existentes:
+                sg.popup_error("Error", f"La categoría '{nombre}' ya existe.")
             else:
                 categoria = nombre
                 break
@@ -141,7 +159,7 @@ def _ventana_agregar_movimiento(tipo, categorias):
         [sg.Text("Título"), sg.Input(key="-TITULO-", enable_events=True)],
         [sg.Text("Monto"), sg.Text("₡"), sg.Input(key="-MONTO-", enable_events=True)],
         [sg.pin(sg.Text(f"Máximo {_MAX_TITULO} caracteres para el título", text_color="red", key="-AVISO_TITULO-", visible=False))],
-        [sg.Text("Categoría"), sg.Combo(categorias, key="-CATEGORIA-")],
+        [sg.Text("Categoría"), sg.Combo(categorias, key="-CATEGORIA-", readonly=True)],
         [sg.Text("Fecha (dd/mm/yyyy)"), sg.Input(fecha_hoy, key="-FECHA-"), sg.CalendarButton("📅", target="-FECHA-", format=_FORMATO_FECHA, no_titlebar=False)],
         [sg.Button("Guardar"), sg.Button("Cancelar")],
     ]
@@ -169,6 +187,8 @@ def _ventana_agregar_movimiento(tipo, categorias):
             titulo = values["-TITULO-"].strip()
             if not titulo or not values["-MONTO-"] or not values["-CATEGORIA-"] or not values["-FECHA-"]:
                 sg.popup_error("Error", "Completa título, monto, categoría y fecha antes de guardar.")
+            elif values["-CATEGORIA-"] not in categorias:
+                sg.popup_error("Error", f"La categoría '{values['-CATEGORIA-']}' no existe. Selecciona una de la lista.")
             elif not _es_fecha_valida(values["-FECHA-"]):
                 sg.popup_error("Error", "La fecha debe tener el formato dd/mm/yyyy.")
             else:

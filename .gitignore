@@ -4,3 +4,5 @@ __pycache__/
 students.csv
 venv/
 .pytest_cache/
+Python Intermedio/Gestor de Finanzas/categorias.json
+Python Intermedio/Gestor de Finanzas/movimientos.json
