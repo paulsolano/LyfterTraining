@@ -1,3 +1,4 @@
-import interfaz
+import interface
 
-interfaz.ejecutar()
+if __name__ == "__main__":
+    interface.run()
