@@ -10,13 +10,13 @@ class Shape(ABC):
         pass
 
 class Circle(Shape):
-        def __init__(self, radius):
+    def __init__(self, radius):
             self.radius = radius
 
-        def calculate_area(self):
+    def calculate_area(self):
             return 3.14 * self.radius ** 2
 
-        def calculate_perimeter(self):
+    def calculate_perimeter(self):
             return 2 * 3.14 * self.radius
 
 class Square(Shape):

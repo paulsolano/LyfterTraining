@@ -5,12 +5,6 @@ def read_lines(path):
         return f.readlines()
 
 class TestReadLines:
-    def test_read_lines_returns_file_content(self):
-        contenido_falso = "linea 1\nlinea 2\nlinea 3\n"
-        with patch("builtins.open", mock_open(read_data=contenido_falso)):
-            result = read_lines("cualquier_ruta.txt")
-        assert result == ["linea 1\n", "linea 2\n", "linea 3\n"]
-
     def test_return_expected_lines_without_new_files(self):
         contenido_falso = "linea 1\nlinea 2\nlinea 3\n"
         with patch("builtins.open", mock_open(read_data=contenido_falso)):
