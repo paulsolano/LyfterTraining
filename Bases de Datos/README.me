@@ -1,0 +1,17 @@
+# Ejercicio: Diseño de base de datos
+
+## Revisión de relaciones
+
+La relación entre productos y facturas, y entre productos y carritos,
+es de muchos a muchos (N:N): una factura o carrito puede tener varios
+productos, y un mismo producto puede estar en muchas facturas o carritos.
+
+Como una base de datos relacional no puede guardar una N:N directamente,
+se resuelve con tablas intermedias (`Products Per Invoice` y
+`Products Per Cart`), que convierten cada relación N:N en dos
+relaciones de uno a muchos (1:N):
+
+- Invoices 1:N Products Per Invoice
+- Products 1:N Products Per Invoice
+- Shopping Cart 1:N Products Per Cart
+- Products 1:N Products Per Cart
